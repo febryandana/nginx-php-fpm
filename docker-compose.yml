@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  web:
+    container_name: nginx-php1
+    image: nginx:1.18-alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./code:/var/www/html
+      - ./site.conf:/etc/nginx/conf.d/default.conf
+
+  php:
+    container_name: nginx-php2
+    image: php:7.2.24-fpm-alpine
+    ports:
+      - 9000:9000
+    volumes:
+      - ./code:/var/www/html
+      - ./log.conf:/usr/local/etc/php-fpm.d/zz-log.conf
